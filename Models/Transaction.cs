@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppControleFinanceiro.Models
 {
-    class Transaction
+    public class Transaction
     {
         [BsonId]
         public int Id { get; set; }
@@ -18,12 +18,12 @@ namespace AppControleFinanceiro.Models
 
         public DateTimeOffset Date { get; set; }
 
-        public decimal Value { get; set; }
+        public double Value { get; set; }
     }
 
     public enum TransactionType
     {
         Income,
-        Expenses
+        Expense
     }
 }

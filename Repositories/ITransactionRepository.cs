@@ -2,7 +2,7 @@
 
 namespace AppControleFinanceiro.Repositories
 {
-    internal interface ITransactionRepository
+    public interface ITransactionRepository
     {
         void Add(Transaction transaction);
         void Delete(Transaction transaction);

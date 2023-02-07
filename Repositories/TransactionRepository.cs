@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AppControleFinanceiro.Repositories
 {
-    class TransactionRepository : ITransactionRepository
+    public class TransactionRepository : ITransactionRepository
     {
         private readonly LiteDatabase _database;
         private readonly string collectionName = "transaction";
