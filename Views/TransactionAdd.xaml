@@ -11,11 +11,17 @@
                 HorizontalOptions="Center"
                 Grid.Row="0"
                 Grid.Column="0"/>
-                <Label 
-                Text="X" TextColor="White"
-                HorizontalOptions="Center" 
-                Grid.Row="0"
-                Grid.Column="1"/>
+                <Image
+                    Source="close.png"
+                    WidthRequest="17"
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center"
+                    Grid.Row="0"
+                    Grid.Column="1">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
         </Border>
 

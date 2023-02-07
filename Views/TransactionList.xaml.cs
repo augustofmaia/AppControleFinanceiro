@@ -9,11 +9,11 @@ public partial class TransactionList : ContentPage
 
 	private void OnbuttonClicked_To_TransactionAdd(object sender, EventArgs args)
 	{
-		Navigation.PushAsync(new TransactionAdd());
+		Navigation.PushModalAsync(new TransactionAdd());
 	}
 
     private void OnbuttonClicked_To_TransactionEdit(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new TransactionEdit());
+        Navigation.PushModalAsync(new TransactionEdit());
     }
 }
