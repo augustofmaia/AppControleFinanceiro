@@ -1,24 +1,64 @@
+using AppControleFinanceiro.Models;
+using AppControleFinanceiro.Repositories;
+using CommunityToolkit.Mvvm.Messaging;
+
 namespace AppControleFinanceiro.Views;
 
 public partial class TransactionList : ContentPage
 {
-	private TransactionAdd _transactionAdd;
-    private TransactionEdit _transactionEdit;
-    public TransactionList(TransactionAdd transactionAdd, TransactionEdit transactionEdit)
-	{
-		this._transactionAdd = transactionAdd;
-		this._transactionEdit = transactionEdit;
+    /* NuGet -> CommunityToolkit.Mvvm
+	 * "Padrão de projeto"  Publisher - Subscribers
+	 * o TransactionAdd vai ser o publicador de cadastro (Mensagem > Transaction)
+	 * o TransactionList vai ser o assinante (Recebe o Transaction)
+	 */
 
+    private ITransactionRepository _repository;
+    public TransactionList(ITransactionRepository repository)
+	{
+		this._repository = repository;
+		
 		InitializeComponent();
+
+		Reload();
+
+		// So vai rodar quando tiver notificação de cadastro
+		WeakReferenceMessenger.Default.Register<string>(this, (e, msg) =>
+		{
+			Reload();
+        });
+
 	}
+
+	private void Reload()
+	{
+		var items = _repository.GetAll();
+        CollectionViewTransaction.ItemsSource = items;
+
+		double income = items.Where(a => a.Type == Models.TransactionType.Income).Sum(a => a.Value);
+		double expense = items.Where(a => a.Type == Models.TransactionType.Expense).Sum(a => a.Value);
+		double balance = income - expense;
+
+		LabelIncame.Text = income.ToString("C");
+		LabelExpense.Text = expense.ToString("C");
+		LabelBalance.Text = balance.ToString("C");
+    }
 
 	private void OnbuttonClicked_To_TransactionAdd(object sender, EventArgs args)
 	{
-		Navigation.PushModalAsync(_transactionAdd);
+		var transactionAdd = Handler.MauiContext.Services.GetService<TransactionAdd>();
+		Navigation.PushModalAsync(transactionAdd);
 	}
+	
 
-    private void OnbuttonClicked_To_TransactionEdit(object sender, EventArgs e)
+
+    private void TapGestureRecognizerTapped_To_TransactionEdit(object sender, TappedEventArgs e)
     {
-        Navigation.PushModalAsync(_transactionEdit);
+		var grid = (Grid)sender;
+		var gesture = (TapGestureRecognizer)grid.GestureRecognizers[0];
+		Transaction transaction = (Transaction)gesture.CommandParameter;
+
+        var transactionEdit = Handler.MauiContext.Services.GetService<TransactionEdit>();
+		transactionEdit.SetTransactionToEdit(transaction);
+        Navigation.PushModalAsync(transactionEdit);
     }
 }

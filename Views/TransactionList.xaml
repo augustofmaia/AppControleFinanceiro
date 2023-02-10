@@ -9,41 +9,42 @@
     </ContentPage.Resources>
     
     <VerticalStackLayout>
-
-        <Grid Padding="15" ColumnDefinitions="50,*,Auto">
-            <Label Text="S"
+        <CollectionView x:Name="CollectionViewTransaction">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="15" ColumnDefinitions="50,*,Auto">
+                        <!-- o gestureRecognizer serve como ação de clic -->
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizerTapped_To_TransactionEdit" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="S"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
                    FontSize="20" 
                    BackgroundColor="White"/>
-            <VerticalStackLayout Grid.Column="1">
-                <Label Text="Salário" />
-                <Label Text="07/02/2023" TextColor="#BABABA" />
-            </VerticalStackLayout>
-            <Label Grid.Column="2" Text="R$ 4.500,00" TextColor="#939e5a" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding Date,StringFormat= '{0:dd/MM/yyyy}'}" TextColor="#BABABA" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="{Binding Value,StringFormat= '{0:C}'}" TextColor="#939e5a" VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-
-
-
-        </Grid>
-        
-       
-
-        
-        <Button Text="Edit" Clicked="OnbuttonClicked_To_TransactionEdit" HorizontalOptions="Center" />
 
         <Border BackgroundColor="{StaticResource Black}"  Stroke="Transparent" Padding="15" StrokeShape="RoundRectangle 30" Margin="10">
             <Grid ColumnDefinitions="*,80" RowDefinitions="Auto, Auto, 30, Auto, Auto">
                 <Label Text="Saldo" TextColor="#979797" FontSize="18" />
-                <Label Text="R$2.760,00" Grid.Row="1" TextColor="{StaticResource White}" FontSize="30" />
+                <Label x:Name="LabelBalance" Grid.Row="1" TextColor="{StaticResource White}" FontSize="30"  />
 
                 <Button Clicked="OnbuttonClicked_To_TransactionAdd" Grid.Column="1"  Grid.RowSpan="2" HorizontalOptions="Center" Text="+" FontSize="40" WidthRequest="54" HeightRequest="54" Padding="0" CornerRadius="27"/>
 
                 <Label Text="Receita" Grid.Row="3" TextColor="#979797" FontSize="14" />
-                <Label Text="R$6.760,00" Grid.Row="4" TextColor="{StaticResource White}" FontSize="16" />
+                <Label x:Name="LabelIncame" Grid.Row="4" TextColor="{StaticResource White}" FontSize="16" />
 
                 <Label Text="Despesa" Grid.Row="3" Grid.Column="1" TextColor="#979797" FontSize="14" />
-                <Label Text="R$460,00" Grid.Row="4" Grid.Column="1" TextColor="{StaticResource White}" FontSize="16" />
+                <Label x:Name="LabelExpense" Grid.Row="4" Grid.Column="1" TextColor="{StaticResource White}" FontSize="16" />
             </Grid>
         </Border>
 

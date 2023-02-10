@@ -19,11 +19,12 @@
                     Grid.Row="0"
                     Grid.Column="1">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizerTapped_ToClose" />
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
         </Border>
+        
         <Label TextColor="Red" x:Name="LabelError" IsVisible="False" Margin="30,0"/>
 
         <Grid ColumnDefinitions="*, *" Margin="30,15" > 

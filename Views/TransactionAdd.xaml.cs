@@ -1,5 +1,6 @@
 using AppControleFinanceiro.Models;
 using AppControleFinanceiro.Repositories;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Text;
 
 namespace AppControleFinanceiro.Views;
@@ -15,7 +16,7 @@ public partial class TransactionAdd : ContentPage
 
 	}
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    private void TapGestureRecognizerTapped_ToClose(object sender, TappedEventArgs e)
     {
 		Navigation.PopModalAsync();
     }
@@ -26,8 +27,11 @@ public partial class TransactionAdd : ContentPage
     {
         if (IsValidData() == false)
             return;
+
         SaveTransactionInDatabase();
+        
         Navigation.PopModalAsync();
+        WeakReferenceMessenger.Default.Send<string>(string.Empty);
 
         var count = _repository.GetAll().Count;
         App.Current.MainPage.DisplayAlert("Mensagem!", $"Existem {count} registro(s) no banco!" , "OK");
