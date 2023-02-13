@@ -61,4 +61,17 @@ public partial class TransactionList : ContentPage
 		transactionEdit.SetTransactionToEdit(transaction);
         Navigation.PushModalAsync(transactionEdit);
     }
+
+	// Elemento para deletar a entrada atravez do button
+    private async void TapGestureRecognizerTapped_ToDelete(object sender, TappedEventArgs e)
+    {
+		 bool result = await App.Current.MainPage.DisplayAlert("Excluir!", "Tem certeza que deseja excluir?" , "Sim", "Não");
+		if (result)
+		{
+			Transaction transaction = (Transaction)e.Parameter;
+			_repository.Delete(transaction);
+
+			Reload();
+		}
+    }
 }

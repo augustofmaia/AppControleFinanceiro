@@ -22,11 +22,18 @@
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizerTapped_To_TransactionEdit" />
                         </Grid.GestureRecognizers>
-                        <Label Text="S"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   FontSize="20" 
-                   BackgroundColor="White"/>
+                        <Border WidthRequest="40" HeightRequest="40" BackgroundColor="White" Stroke="transparent" StrokeShape="RoundRectangle 20" >
+                            <!-- Elemento para deletar a entrada atravez do button -->
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizerTapped_ToDelete" />
+                            </Border.GestureRecognizers>
+                            
+                            <Label Text="S"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               FontSize="20" 
+                               BackgroundColor="White"/>
+                        </Border>
                         <VerticalStackLayout Grid.Column="1">
                             <Label Text="{Binding Name}" />
                             <Label Text="{Binding Date,StringFormat= '{0:dd/MM/yyyy}'}" TextColor="#BABABA" />
