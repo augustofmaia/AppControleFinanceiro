@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <VerticalStackLayout>
+    <Grid RowDefinitions="*, 175">
         <CollectionView x:Name="CollectionViewTransaction">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -48,7 +48,7 @@
         </CollectionView>
 
 
-        <Border BackgroundColor="{StaticResource Black}"  Stroke="Transparent" Padding="15" StrokeShape="RoundRectangle 30" Margin="10">
+        <Border Grid.Row="1" HeightRequest="170" BackgroundColor="{StaticResource Black}"  Stroke="Transparent" Padding="15" StrokeShape="RoundRectangle 30" Margin="10">
             <Grid ColumnDefinitions="*,80" RowDefinitions="Auto, Auto, 30, Auto, Auto">
                 <Label Text="Saldo" TextColor="#979797" FontSize="18" />
                 <Label x:Name="LabelBalance" Grid.Row="1" TextColor="{StaticResource White}" FontSize="30"  />
@@ -64,5 +64,5 @@
         </Border>
 
 
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
