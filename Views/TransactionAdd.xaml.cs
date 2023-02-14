@@ -1,3 +1,4 @@
+using AppControleFinanceiro.Libraries.Utils.FixBugs;
 using AppControleFinanceiro.Models;
 using AppControleFinanceiro.Repositories;
 using CommunityToolkit.Mvvm.Messaging;
@@ -18,7 +19,10 @@ public partial class TransactionAdd : ContentPage
 
     private void TapGestureRecognizerTapped_ToClose(object sender, TappedEventArgs e)
     {
-		Navigation.PopModalAsync();
+        //Correção do bug que o teclado não some
+        KeyboardFixBugs.HideKeyboard();
+
+        Navigation.PopModalAsync();
     }
 
 
@@ -29,12 +33,16 @@ public partial class TransactionAdd : ContentPage
             return;
 
         SaveTransactionInDatabase();
-        
+        KeyboardFixBugs.HideKeyboard();
         Navigation.PopModalAsync();
+
         WeakReferenceMessenger.Default.Send<string>(string.Empty);
 
-        var count = _repository.GetAll().Count;
-        App.Current.MainPage.DisplayAlert("Mensagem!", $"Existem {count} registro(s) no banco!" , "OK");
+
+        
+        //Forma de aparecer uma mensagem de notificação
+        //var count = _repository.GetAll().Count;
+        //App.Current.MainPage.DisplayAlert("Mensagem!", $"Existem {count} registro(s) no banco!" , "OK");
 
     }
 

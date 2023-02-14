@@ -49,6 +49,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Libraries\Converters\NovaPasta\**" />
+	  <AndroidResource Remove="Libraries\NovaPasta1\**" />
+	  <Compile Remove="Libraries\Converters\NovaPasta\**" />
+	  <Compile Remove="Libraries\NovaPasta1\**" />
+	  <EmbeddedResource Remove="Libraries\Converters\NovaPasta\**" />
+	  <EmbeddedResource Remove="Libraries\NovaPasta1\**" />
+	  <MauiCss Remove="Libraries\Converters\NovaPasta\**" />
+	  <MauiCss Remove="Libraries\NovaPasta1\**" />
+	  <MauiXaml Remove="Libraries\Converters\NovaPasta\**" />
+	  <MauiXaml Remove="Libraries\NovaPasta1\**" />
+	  <None Remove="Libraries\Converters\NovaPasta\**" />
+	  <None Remove="Libraries\NovaPasta1\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
 	</ItemGroup>
 
